@@ -26,19 +26,13 @@ printf '%s' 'your-new-password' | sha256sum
 
 **Honest limit:** this is a classroom gate on a static site (GitHub Pages has no server-side auth). It stops casual visitors with the URL. A determined person can still read the static files. Keep the repo private and share the password only in Slack / class.
 
-## Enable GitHub Pages (one-time)
+## Live site
 
-Private repos need **GitHub Pro** (or Team) for Pages.
+**https://andrea.magazzini.me/tou-new-technologies-challenge/**
 
-1. Open [Settings → Pages](https://github.com/andreamagazzini/tou-new-technologies-challenge/settings/pages)
-2. **Build and deployment** → Source: **Deploy from a branch**
-3. Branch: `main` / folder: `/ (root)` → Save
-4. Site URL will be:
-   `https://andreamagazzini.github.io/tou-new-technologies-challenge/`
+Visitors hit the login screen first. Shared password: see below (or Slack).
 
-Visitors hit the login screen first.
-
-If Pages is greyed out, the account is on the free plan — upgrade, or say if you want a password-protected Vercel deploy instead.
+`*.github.io` redirects to the custom domain.
 
 ## Present locally (no Pages needed)
 
