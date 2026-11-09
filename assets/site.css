@@ -1,0 +1,196 @@
+:root {
+  --bg: #0f1412;
+  --bg-elevated: #18201c;
+  --surface: #1e2a24;
+  --text: #eef3ef;
+  --muted: #9aada2;
+  --accent: #3dbe8c;
+  --accent-dim: #2a8f68;
+  --line: rgba(238, 243, 239, 0.12);
+  --warning: #e6b35a;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Figtree", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(61, 190, 140, 0.16), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(230, 179, 90, 0.08), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wrap {
+  width: min(960px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 3.5rem 0 4rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 550;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  max-width: 38rem;
+  margin: 0 0 2.5rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .grid.cols-2 {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.card {
+  display: block;
+  padding: 1.35rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  transform: translateY(-2px);
+}
+
+.card h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 550;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.pill.accent {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  color: var(--accent);
+}
+
+.section {
+  margin-top: 2.75rem;
+}
+
+.section h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 550;
+}
+
+.list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--bg-elevated);
+}
+
+.list a:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
+}
+
+.list strong {
+  font-weight: 600;
+}
+
+.list span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.foot {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.foot a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hint {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
