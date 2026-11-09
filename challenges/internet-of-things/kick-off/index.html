@@ -18,7 +18,20 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
     />
+    <script src="../../../assets/auth-config.js"></script>
+    <script src="../../../assets/auth.js"></script>
+    <script>
+      if (!TouAuth.requireAuth()) {
+        /* redirect in progress */
+      }
+    </script>
     <style>
+      html:not(.tou-authed) body {
+        visibility: hidden;
+      }
+      html.tou-authed body {
+        visibility: visible;
+      }
       :root {
         --bg: #0f1412;
         --panel: #18201c;
@@ -740,17 +753,19 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
     <script>
-      Reveal.initialize({
-        hash: true,
-        slideNumber: "c/t",
-        showNotes: false,
-        transition: "fade",
-        backgroundTransition: "fade",
-        width: 1280,
-        height: 720,
-        margin: 0.08,
-        plugins: [RevealNotes],
-      });
+      if (TouAuth.isAuthed()) {
+        Reveal.initialize({
+          hash: true,
+          slideNumber: "c/t",
+          showNotes: false,
+          transition: "fade",
+          backgroundTransition: "fade",
+          width: 1280,
+          height: 720,
+          margin: 0.08,
+          plugins: [RevealNotes],
+        });
+      }
     </script>
   </body>
 </html>

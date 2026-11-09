@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="tou-login">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in — New Technologies Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/site.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+      .login-card {
+        width: min(420px, calc(100% - 2rem));
+        padding: 1.75rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+      }
+      .login-card h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.4rem;
+      }
+      .login-card .lede {
+        margin-bottom: 1.4rem;
+        font-size: 0.98rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.4rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      input[type="password"] {
+        width: 100%;
+        padding: 0.75rem 0.85rem;
+        border: 1px solid var(--line);
+        border-radius: 0.65rem;
+        background: var(--bg);
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+      }
+      input[type="password"]:focus {
+        outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+        outline-offset: 1px;
+      }
+      button {
+        width: 100%;
+        margin-top: 0.9rem;
+        padding: 0.8rem 1rem;
+        border: 0;
+        border-radius: 0.65rem;
+        background: var(--accent);
+        color: #062117;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button:hover {
+        background: color-mix(in srgb, var(--accent) 85%, white);
+      }
+      .error {
+        display: none;
+        margin-top: 0.75rem;
+        color: #e07a6a;
+        font-size: 0.9rem;
+      }
+      .error.show {
+        display: block;
+      }
+      .note {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+    </style>
+    <script src="assets/auth-config.js"></script>
+    <script src="assets/auth.js"></script>
+  </head>
+  <body>
+    <form class="login-card" id="login-form" autocomplete="current-password">
+      <p class="eyebrow">Tomorrow University</p>
+      <h1>Session access</h1>
+      <p class="lede">Enter the shared password to open the live-session decks.</p>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autofocus />
+      <button type="submit">Unlock decks</button>
+      <p class="error" id="error">Wrong password. Try again.</p>
+      <p class="note">
+        Access lasts for this browser tab session. This is a shared classroom
+        gate, not a personal account.
+      </p>
+    </form>
+    <script>
+      (async function () {
+        if (TouAuth.isAuthed()) {
+          const params = new URLSearchParams(location.search);
+          const next = params.get("next");
+          location.replace(next && next.startsWith("/") ? next : TouAuth.homeUrl());
+          return;
+        }
+
+        const form = document.getElementById("login-form");
+        const error = document.getElementById("error");
+        const input = document.getElementById("password");
+
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          error.classList.remove("show");
+          const ok = await TouAuth.tryLogin(input.value);
+          if (!ok) {
+            error.classList.add("show");
+            input.select();
+            return;
+          }
+          const params = new URLSearchParams(location.search);
+          const next = params.get("next");
+          location.replace(next && next.startsWith("/") ? next : TouAuth.homeUrl());
+        });
+      })();
+    </script>
+  </body>
+</html>

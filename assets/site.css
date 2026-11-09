@@ -1,3 +1,12 @@
+/* Hide page chrome until auth.js marks the document as unlocked */
+html:not(.tou-authed) body {
+  visibility: hidden;
+}
+html.tou-authed body,
+html.tou-login body {
+  visibility: visible;
+}
+
 :root {
   --bg: #0f1412;
   --bg-elevated: #18201c;
