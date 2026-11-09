@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,650&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -21,329 +21,488 @@
     <script src="../../../assets/auth-config.js"></script>
     <script src="../../../assets/auth.js"></script>
     <script>
-      if (!TouAuth.requireAuth()) {
-        /* redirect in progress */
-      }
+      TouAuth.requireAuth();
     </script>
     <style>
+      :root {
+        --tou-purple: #4214b7;
+        --tou-purple-deep: #3a10a8;
+        --tou-green: #b8ff7a;
+        --tou-ink: #14121f;
+        --tou-muted: #5b5670;
+        --tou-line: rgba(66, 20, 183, 0.14);
+        --font-serif: "Playfair Display", Georgia, serif;
+        --font-sans: "Figtree", system-ui, sans-serif;
+      }
+
       html:not(.tou-authed) body {
         visibility: hidden;
       }
       html.tou-authed body {
         visibility: visible;
       }
-      :root {
-        --bg: #0f1412;
-        --panel: #18201c;
-        --text: #eef3ef;
-        --muted: #9aada2;
-        --accent: #3dbe8c;
-        --accent-2: #e6b35a;
-        --line: rgba(238, 243, 239, 0.14);
-        --danger: #e07a6a;
-      }
 
       .reveal-viewport {
-        background:
-          radial-gradient(900px 480px at 12% -8%, rgba(61, 190, 140, 0.18), transparent 55%),
-          radial-gradient(700px 420px at 100% 8%, rgba(230, 179, 90, 0.08), transparent 50%),
-          var(--bg);
+        background: #fff;
       }
 
       .reveal {
-        font-family: "Figtree", system-ui, sans-serif;
-        color: var(--text);
+        font-family: var(--font-sans);
         font-size: 36px;
+        color: var(--tou-ink);
+      }
+
+      .reveal .slides section {
+        height: 100%;
+        box-sizing: border-box;
       }
 
       .reveal h1,
       .reveal h2,
       .reveal h3 {
-        font-family: "Fraunces", Georgia, serif;
-        font-weight: 550;
+        font-family: var(--font-serif);
+        font-weight: 600;
         text-transform: none;
         letter-spacing: -0.02em;
-        color: var(--text);
+        color: var(--tou-ink);
+        text-wrap: balance;
       }
 
       .reveal h1 {
-        font-size: 2.4em;
+        font-size: 2.55em;
         line-height: 1.05;
       }
 
       .reveal h2 {
-        font-size: 1.55em;
-        line-height: 1.15;
-        margin-bottom: 0.55em;
-      }
-
-      .reveal h3 {
-        font-size: 1.05em;
+        font-size: 1.7em;
+        line-height: 1.12;
+        margin-bottom: 0.45em;
       }
 
       .reveal p,
       .reveal li {
-        color: var(--muted);
+        font-family: var(--font-sans);
+        color: var(--tou-muted);
       }
 
       .reveal strong {
-        color: var(--text);
-        font-weight: 650;
-      }
-
-      .reveal .accent {
-        color: var(--accent);
+        color: var(--tou-ink);
+        font-weight: 700;
       }
 
       .reveal .eyebrow {
         display: inline-block;
-        margin-bottom: 0.85rem;
-        color: var(--accent);
-        font-size: 0.45em;
+        margin: 0 0 0.55em;
+        color: var(--tou-purple);
+        font-family: var(--font-sans);
+        font-size: 0.48em;
         font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        letter-spacing: 0.02em;
       }
 
-      .reveal .lede {
-        max-width: 18em;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 0.7em;
-        color: var(--muted);
+      .reveal .corner {
+        position: absolute;
+        top: 0.55em;
+        right: 0.7em;
+        color: rgba(255, 255, 255, 0.92);
+        font-family: var(--font-sans);
+        font-size: 0.42em;
+        font-weight: 500;
+      }
+
+      .reveal .mark {
+        display: inline-block;
+        padding: 0.12em 0.35em;
+        background: var(--tou-green);
+        color: var(--tou-ink);
+        font-family: var(--font-sans);
+        font-size: 0.55em;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .reveal .mark.purple {
+        background: var(--tou-purple);
+        color: #fff;
       }
 
       .reveal .meta {
-        margin-top: 1.4em;
-        font-size: 0.45em;
-        color: var(--muted);
-        letter-spacing: 0.04em;
-      }
-
-      .reveal .grid-2,
-      .reveal .grid-3,
-      .reveal .grid-4 {
-        display: grid;
-        gap: 0.7em;
-        margin-top: 0.9em;
-        text-align: left;
-      }
-
-      .reveal .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .reveal .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .reveal .grid-4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .reveal .card {
-        padding: 0.75em 0.8em;
-        border: 1px solid var(--line);
-        border-radius: 0.55em;
-        background: color-mix(in srgb, var(--panel) 92%, transparent);
-      }
-
-      .reveal .card h3 {
-        margin: 0 0 0.35em;
-        font-size: 0.58em;
-      }
-
-      .reveal .card p,
-      .reveal .card li {
-        margin: 0;
-        font-size: 0.42em;
-        line-height: 1.35;
-      }
-
-      .reveal .card.highlight {
-        border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent);
-      }
-
-      .reveal .card.muted {
-        opacity: 0.72;
-      }
-
-      .reveal .steps {
-        display: flex;
-        gap: 0.45em;
-        justify-content: center;
-        flex-wrap: wrap;
         margin-top: 1.1em;
-      }
-
-      .reveal .step {
-        min-width: 7.5em;
-        padding: 0.65em 0.7em;
-        border: 1px solid var(--line);
-        border-radius: 0.5em;
-        background: var(--panel);
-        text-align: left;
-      }
-
-      .reveal .step .n {
-        display: block;
-        margin-bottom: 0.25em;
-        color: var(--accent);
-        font-size: 0.38em;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .reveal .step strong {
-        display: block;
-        font-size: 0.48em;
-        margin-bottom: 0.2em;
-      }
-
-      .reveal .step span {
-        display: block;
-        font-size: 0.36em;
-        color: var(--muted);
-        line-height: 1.3;
-      }
-
-      .reveal .layers {
-        display: grid;
-        gap: 0.45em;
-        margin-top: 0.9em;
-        text-align: left;
-      }
-
-      .reveal .layer {
-        display: grid;
-        grid-template-columns: 8.5em 1fr;
-        gap: 0.75em;
-        align-items: center;
-        padding: 0.55em 0.7em;
-        border: 1px solid var(--line);
-        border-radius: 0.45em;
-        background: var(--panel);
-      }
-
-      .reveal .layer strong {
-        font-size: 0.48em;
-        color: var(--accent);
-      }
-
-      .reveal .layer span {
-        font-size: 0.42em;
-        color: var(--muted);
-      }
-
-      .reveal .checklist {
-        list-style: none;
-        margin: 0.8em auto 0;
-        padding: 0;
-        max-width: 16em;
-        text-align: left;
-      }
-
-      .reveal .checklist li {
-        position: relative;
-        margin: 0.45em 0;
-        padding-left: 1.1em;
-        font-size: 0.58em;
-        color: var(--text);
-      }
-
-      .reveal .checklist li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.35em;
-        width: 0.55em;
-        height: 0.55em;
-        border: 2px solid var(--accent);
-        border-radius: 0.15em;
-      }
-
-      .reveal .prompt {
-        display: inline-block;
-        margin-top: 0.8em;
-        padding: 0.45em 0.8em;
-        border: 1px dashed color-mix(in srgb, var(--accent) 55%, var(--line));
-        border-radius: 999px;
-        color: var(--accent);
-        font-size: 0.45em;
-        font-weight: 600;
-      }
-
-      .reveal .tiny {
-        margin-top: 1em;
-        font-size: 0.38em;
-        color: var(--muted);
-      }
-
-      .reveal .two-col {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1em;
-        text-align: left;
-        margin-top: 0.8em;
-      }
-
-      .reveal .two-col h3 {
-        margin: 0 0 0.25em;
+        color: rgba(255, 255, 255, 0.85);
         font-size: 0.55em;
       }
 
-      .reveal .two-col p {
-        margin: 0;
-        font-size: 0.42em;
+      /* Purple full-bleed */
+      .reveal .slide-purple {
+        color: #fff;
+      }
+      .reveal .slide-purple h1,
+      .reveal .slide-purple h2,
+      .reveal .slide-purple h3,
+      .reveal .slide-purple strong {
+        color: #fff;
+      }
+      .reveal .slide-purple p,
+      .reveal .slide-purple li {
+        color: rgba(255, 255, 255, 0.9);
       }
 
-      .reveal table.rubric {
+      /* Split layouts */
+      .split {
+        display: grid;
+        grid-template-columns: 0.42fr 0.58fr;
         width: 100%;
-        margin-top: 0.7em;
-        border-collapse: collapse;
-        font-size: 0.4em;
+        height: 100%;
+        min-height: 700px;
         text-align: left;
       }
+      .split-left,
+      .split-right {
+        padding: 1.35em 1.2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+      .split-left {
+        background: var(--tou-purple);
+        color: #fff;
+        position: relative;
+      }
+      .split-left h1,
+      .split-left h2,
+      .split-left p,
+      .split-left li,
+      .split-left strong {
+        color: #fff;
+      }
+      .split-right {
+        background: #fff;
+      }
 
-      .reveal table.rubric th,
-      .reveal table.rubric td {
-        padding: 0.55em 0.6em;
-        border-bottom: 1px solid var(--line);
+      .people {
+        display: grid;
+        gap: 1.1em;
+      }
+      .person {
+        display: grid;
+        grid-template-columns: 4.2em 1fr;
+        gap: 0.75em;
+        align-items: center;
+      }
+      .person img {
+        width: 4.2em;
+        height: 4.2em;
+        border-radius: 999px;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 3px var(--tou-purple);
+        margin: 0;
+        background: #eee;
+      }
+      .person .role {
+        margin: 0 0 0.2em;
+      }
+      .person .name {
+        margin: 0 0 0.25em;
+      }
+      .person .bio {
+        margin: 0;
+        font-size: 0.38em;
+        line-height: 1.35;
+        color: var(--tou-muted);
+      }
+
+      /* Content + image */
+      .with-art {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 0.8em;
+        align-items: center;
+        text-align: left;
+        height: 100%;
+        padding: 0.4em 0.2em;
+      }
+      .with-art .copy h2 {
+        margin-top: 0.1em;
+      }
+      .with-art img.art {
+        width: 100%;
+        max-height: 560px;
+        object-fit: contain;
+        margin: 0;
+        background: transparent;
+      }
+
+      .devices {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 1.2em;
+        margin-top: 0.9em;
+      }
+      .devices img {
+        margin: 0;
+        max-height: 7.5em;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+      }
+
+      .quiz-row {
+        display: grid;
+        grid-template-columns: 5.5em 1fr;
+        gap: 0.85em;
+        align-items: center;
+        text-align: left;
+        margin: 0.7em auto;
+        max-width: 18em;
+      }
+      .quiz-row:nth-child(even) {
+        grid-template-columns: 1fr 5.5em;
+      }
+      .quiz-row:nth-child(even) .quiz-visual {
+        order: 2;
+      }
+      .quiz-row:nth-child(even) p {
+        text-align: right;
+      }
+      .quiz-visual {
+        position: relative;
+        width: 5.5em;
+      }
+      .quiz-visual img.device {
+        width: 100%;
+        margin: 0;
+        filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+      }
+      .quiz-visual .badge {
+        position: absolute;
+        left: -0.15em;
+        bottom: -0.1em;
+        width: 1.15em;
+        height: 1.15em;
+      }
+      .quiz-row p {
+        margin: 0;
+        font-size: 0.48em;
+        line-height: 1.35;
+        color: #fff;
+      }
+
+      .steps {
+        display: flex;
+        gap: 0.45em;
+        flex-wrap: wrap;
+        margin-top: 0.9em;
+      }
+      .step {
+        flex: 1 1 7em;
+        min-width: 7em;
+        padding: 0.7em 0.65em;
+        border-radius: 0.55em;
+        background: var(--tou-purple);
+        color: #fff;
+        text-align: left;
+      }
+      .step .n {
+        display: block;
+        margin-bottom: 0.25em;
+        color: var(--tou-green);
+        font-size: 0.34em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .step strong {
+        display: block;
+        color: #fff;
+        font-family: var(--font-sans);
+        font-size: 0.48em;
+        margin-bottom: 0.2em;
+      }
+      .step span {
+        display: block;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.34em;
+        line-height: 1.3;
+      }
+
+      .canvas-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55em;
+        margin-top: 0.7em;
+        text-align: left;
+      }
+      .canvas-grid .box {
+        border: 1.5px solid var(--tou-line);
+        border-radius: 0.45em;
+        padding: 0.65em 0.7em;
+        background: #faf8ff;
+        min-height: 4.2em;
+      }
+      .canvas-grid h3 {
+        margin: 0 0 0.25em;
+        font-family: var(--font-sans);
+        font-size: 0.48em;
+        color: var(--tou-purple);
+      }
+      .canvas-grid p {
+        margin: 0;
+        font-size: 0.38em;
+        line-height: 1.3;
+      }
+
+      .journey {
+        display: flex;
+        align-items: stretch;
+        gap: 0.35em;
+        margin-top: 1em;
+        text-align: center;
+      }
+      .journey .block {
+        flex: 1;
+        background: var(--tou-purple);
+        color: #fff;
+        border-radius: 0.55em;
+        padding: 0.85em 0.45em;
+        font-family: var(--font-sans);
+        font-size: 0.4em;
+        font-weight: 700;
+        line-height: 1.25;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .journey .rail {
+        width: 1.15em;
+        background: var(--tou-green);
+        border-radius: 0.35em;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-sans);
+        font-size: 0.34em;
+        font-weight: 700;
+        color: var(--tou-ink);
+        letter-spacing: 0.04em;
+      }
+      .journey .capstone {
+        width: 2.1em;
+        background: var(--tou-purple);
+        border-radius: 0.55em;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35em;
+        color: #fff;
+        font-family: var(--font-sans);
+        font-size: 0.4em;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+      .journey .sub {
+        display: block;
+        margin-top: 0.35em;
+        color: var(--tou-muted);
+        font-size: 0.32em;
+        font-weight: 600;
+      }
+
+      .rubric {
+        width: 100%;
+        margin-top: 0.5em;
+        border-collapse: collapse;
+        font-size: 0.38em;
+        text-align: left;
+      }
+      .rubric th,
+      .rubric td {
+        padding: 0.55em 0.5em;
+        border-bottom: 1px solid var(--tou-line);
         vertical-align: top;
       }
-
-      .reveal table.rubric th {
-        color: var(--accent);
+      .rubric th {
+        color: var(--tou-purple);
         font-weight: 700;
       }
-
-      .reveal table.rubric td {
-        color: var(--muted);
+      .rubric td {
+        color: var(--tou-muted);
       }
 
-      .reveal .title-slide h1 {
-        margin-bottom: 0.25em;
+      .checklist {
+        list-style: none;
+        margin: 0.8em auto 0;
+        padding: 0;
+        max-width: 17em;
+        text-align: left;
+      }
+      .checklist li {
+        position: relative;
+        margin: 0.45em 0;
+        padding: 0.45em 0.55em 0.45em 1.2em;
+        background: #faf8ff;
+        border: 1px solid var(--tou-line);
+        border-radius: 0.35em;
+        font-size: 0.52em;
+        color: var(--tou-ink);
+      }
+      .checklist li::before {
+        content: "";
+        position: absolute;
+        left: 0.4em;
+        top: 0.65em;
+        width: 0.45em;
+        height: 0.45em;
+        border: 2px solid var(--tou-purple);
+        border-radius: 0.1em;
+        background: var(--tou-green);
       }
 
-      .reveal .center-stack {
+      .prompt {
+        display: inline-block;
+        margin-top: 0.85em;
+        padding: 0.35em 0.75em;
+        background: var(--tou-green);
+        color: var(--tou-ink);
+        font-size: 0.42em;
+        font-weight: 700;
+        border-radius: 999px;
+      }
+
+      .tiny {
+        margin-top: 0.8em;
+        font-size: 0.36em;
+        color: var(--tou-muted);
+      }
+
+      .activity-art {
+        margin-top: 0.6em;
+        max-width: 7.5em;
+        width: 100%;
+      }
+
+      .center-stack {
         max-width: 18em;
         margin: 0 auto;
       }
 
       @media (max-width: 900px) {
-        .reveal .grid-4,
-        .reveal .grid-3,
-        .reveal .grid-2,
-        .reveal .two-col,
-        .reveal .layer {
+        .split,
+        .with-art,
+        .canvas-grid {
           grid-template-columns: 1fr;
         }
-
-        .reveal .steps {
-          flex-direction: column;
-          align-items: stretch;
+        .split {
+          min-height: auto;
+        }
+        .devices {
+          flex-wrap: wrap;
         }
       }
     </style>
@@ -352,22 +511,23 @@
     <div class="reveal">
       <div class="slides">
         <!-- 01 Title -->
-        <section class="title-slide" data-auto-animate>
-          <p class="eyebrow">New Technologies Challenge</p>
-          <h1>Internet of<br /><span class="accent">Things</span></h1>
-          <p class="lede">Kick-Off · 60 minutes</p>
-          <p class="meta">Andrea Magazzini · Tutor: Georg Bollweg</p>
+        <section
+          class="slide-purple"
+          data-background-color="#4214b7"
+        >
+          <p class="corner">Kick Off (60 mins)</p>
+          <h1>Internet of Things</h1>
+          <p class="meta">Andrea Magazzini</p>
           <aside class="notes">
-            Welcome. Goal for the hour: students can explain IoT as sense →
-            connect → decide → act, sketch a system on 4 layers, and know the
-            three Capstone artifacts.
+            Welcome. Goal: IoT as sense → connect → decide → act, sketch on 4
+            layers, know the three Capstone artifacts.
           </aside>
         </section>
 
         <!-- 02 Tonight's promise -->
         <section>
-          <p class="eyebrow">Tonight</p>
-          <h2>What you will be able to do</h2>
+          <p class="eyebrow">Internet of Things</p>
+          <h2>Tonight’s promise</h2>
           <div class="steps">
             <div class="step">
               <span class="n">01</span>
@@ -390,283 +550,316 @@
               <span>Actuate + steer from an app</span>
             </div>
           </div>
-          <p class="tiny">By Capstone you ship: flow diagram · MakeCode · Thunkable dashboard</p>
-          <aside class="notes">
-            State the promise early — before icebreakers deepen. Point ahead to
-            Capstone so the hour has a destination.
-          </aside>
+          <p class="tiny">
+            By Capstone you ship: flow diagram · MakeCode · Thunkable dashboard
+          </p>
         </section>
 
         <!-- 03 Vibe check -->
-        <section>
-          <p class="eyebrow">1 minute</p>
-          <h2>Vibe check</h2>
-          <p class="lede">
-            Drop <strong>one emoji</strong> in chat that matches your energy.
-          </p>
-          <p class="prompt">Then name one “smart” object near you</p>
-          <aside class="notes">
-            One opener only. Capture a few smart-object answers — reuse them in
-            the Smart ≠ IoT slide.
-          </aside>
+        <section
+          data-background-image="assets/media/bg-city-night.jpg"
+          data-background-size="cover"
+          data-background-opacity="0.35"
+          data-background-color="#4214b7"
+        >
+          <h2 style="color: #fff">How are you today?</h2>
+          <p class="prompt">Share an emoji in the chat</p>
+          <aside class="notes">One opener only. Capture energy, then move.</aside>
         </section>
 
         <!-- 04 Who's in the room -->
-        <section>
-          <p class="eyebrow">Facilitation</p>
-          <h2>Who’s in the room</h2>
-          <div class="two-col">
-            <div class="card highlight">
-              <h3>Challenge owner</h3>
-              <p>
-                <strong>Andrea Magazzini</strong><br />
-                Senior Full Stack Engineer<br />
-                Double MSc Advanced Robotics<br />
-                Zurich / Genova / World
+        <section data-background-color="#ffffff">
+          <div class="split">
+            <div class="split-left">
+              <h2 style="font-size: 1.55em; margin: 0 0 0.35em">
+                Internet of<br />Things
+              </h2>
+              <p style="margin: 0; font-size: 0.48em; opacity: 0.92">
+                This challenge is brought to you by…
               </p>
             </div>
-            <div class="card">
-              <h3>Tutor</h3>
-              <p>
-                <strong>Georg Bollweg</strong><br />
-                Your guide through the milestones,<br />
-                discussions, and Capstone craft.
-              </p>
+            <div class="split-right">
+              <div class="people">
+                <div class="person">
+                  <img
+                    src="assets/media/photo-andrea-circle.png"
+                    alt="Andrea Magazzini"
+                  />
+                  <div>
+                    <p class="role"><span class="mark">Challenge Owner</span></p>
+                    <p class="name">
+                      <span class="mark purple">Andrea Magazzini</span>
+                    </p>
+                    <p class="bio">
+                      Senior Full Stack Engineer<br />
+                      Double MSc in Advanced Robotics<br />
+                      Zurich / Genova / World
+                    </p>
+                  </div>
+                </div>
+                <div class="person">
+                  <img
+                    src="assets/media/photo-tutor-circle.png"
+                    alt="Tutor"
+                  />
+                  <div>
+                    <p class="role"><span class="mark">Tutor</span></p>
+                    <p class="name">
+                      <span class="mark purple">Georg Bollweg</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
+
+        <!-- 05 Hook: smart garden -->
+        <section>
+          <div class="with-art">
+            <div class="copy">
+              <p class="eyebrow">Internet of Things</p>
+              <h2>The smart garden</h2>
+              <p style="font-size: 0.48em; max-width: 12em">
+                Dry soil → moisture sensor → network → decision → pump → phone
+                alert. We’ll reuse this example all session.
+              </p>
+            </div>
+            <img
+              class="art"
+              src="assets/media/illu-smart-garden.jpg"
+              alt="Smart garden illustration with sensors and irrigation"
+            />
+          </div>
+        </section>
+
+        <!-- 06 Smart ≠ IoT -->
+        <section class="slide-purple" data-background-color="#4214b7">
+          <h2 style="max-width: 14em; margin-left: auto; margin-right: auto">
+            All of them are smart,<br />but are they also IoT devices?
+          </h2>
+          <div class="devices">
+            <img src="assets/media/device-microwave.png" alt="Microwave" />
+            <img src="assets/media/device-fridge.png" alt="Smart fridge" />
+            <img src="assets/media/device-smartcar.png" alt="Smart car" />
+          </div>
+        </section>
+
+        <!-- 07 Definition quiz with images -->
+        <section class="slide-purple" data-background-color="#4214b7">
+          <div class="quiz-row">
+            <div class="quiz-visual">
+              <img class="device" src="assets/media/device-microwave.png" alt="" />
+              <img class="badge" src="assets/media/icon-no.svg" alt="Not IoT" />
+            </div>
+            <p>
+              It can operate intelligently
+              <strong>without any internet or network connection</strong>.
+            </p>
+          </div>
+          <div class="quiz-row">
+            <p>It has embedded <strong>cellular or Wi‑Fi connectivity</strong></p>
+            <div class="quiz-visual">
+              <img class="device" src="assets/media/device-smartcar.png" alt="" />
+              <img class="badge" src="assets/media/icon-check.png" alt="" />
+            </div>
+          </div>
+          <div class="quiz-row">
+            <div class="quiz-visual">
+              <img class="device" src="assets/media/device-fridge.png" alt="" />
+              <img class="badge" src="assets/media/icon-check.png" alt="" />
+            </div>
+            <p>
+              It acts as a hub to
+              <strong>monitor and control other connected devices</strong>.
+            </p>
+          </div>
           <aside class="notes">
-            Keep bios to one beat. No separate “Introduction” section slide.
+            Land: Smart ≠ IoT. IoT needs sense/actuate + connectivity + remote
+            software control. (Microwave alone is smart-only.)
           </aside>
         </section>
 
-        <!-- 05 Smart garden hook -->
+        <!-- 08 Four layers overview -->
         <section>
-          <p class="eyebrow">Running example</p>
-          <h2>The smart garden</h2>
-          <div class="layers">
-            <div class="layer">
-              <strong>1 · Soil dries</strong>
-              <span>A real-world problem appears in the physical environment</span>
-            </div>
-            <div class="layer">
-              <strong>2 · Moisture sensor</strong>
-              <span>Perception: measure what changed</span>
-            </div>
-            <div class="layer">
-              <strong>3 · Network + logic</strong>
-              <span>Send the reading · decide if watering is needed</span>
-            </div>
-            <div class="layer">
-              <strong>4 · Pump + phone</strong>
-              <span>Actuate the valve · alert / override from the app</span>
-            </div>
-          </div>
-          <aside class="notes">
-            This metaphor returns on definition, layers, and activity. Walk it
-            slowly once — students will reuse it mentally all hour.
-          </aside>
-        </section>
-
-        <!-- 06 What counts as IoT -->
-        <section>
-          <p class="eyebrow">Definition</p>
-          <h2>Smart ≠ IoT</h2>
-          <div class="grid-3">
-            <div class="card muted">
-              <h3>Smart only</h3>
-              <p>
-                Acts intelligently with <strong>no</strong> network — a clever
-                thermostat that never leaves the room.
+          <div class="with-art">
+            <div class="copy">
+              <p class="eyebrow">Internet of Things</p>
+              <h2>The 4 layers</h2>
+              <p style="font-size: 0.45em; max-width: 11em">
+                Perception → Network → Processing → Application. Map each back
+                to the smart garden.
               </p>
             </div>
-            <div class="card muted">
-              <h3>Connected only</h3>
-              <p>
-                Has Wi‑Fi / cellular, but doesn’t meaningfully sense or act on
-                the physical world.
-              </p>
-            </div>
-            <div class="card highlight">
-              <h3>True IoT</h3>
-              <p>
-                Sense / actuate <strong>+</strong> connectivity
-                <strong>+</strong> software that can monitor or control it
-                remotely.
-              </p>
-            </div>
+            <img
+              class="art"
+              src="assets/media/illu-four-layers.jpg"
+              alt="Four IoT layers diagram"
+            />
           </div>
-          <p class="prompt">Chat: which of your “smart” objects are truly IoT?</p>
-          <aside class="notes">
-            Optional quick poll using their earlier examples. Land the crisp
-            definition before layers.
-          </aside>
         </section>
 
-        <!-- 07 Four layers -->
+        <!-- 09 Stack / deeper layers collage -->
         <section>
-          <p class="eyebrow">Architecture</p>
-          <h2>The 4 layers</h2>
-          <div class="layers">
-            <div class="layer">
-              <strong>Perception</strong>
-              <span>Sensors &amp; actuators — soil probe, valve, LEDs on the board</span>
-            </div>
-            <div class="layer">
-              <strong>Network</strong>
-              <span>How data travels — Bluetooth, Wi‑Fi, radio, radio bridge</span>
-            </div>
-            <div class="layer">
-              <strong>Processing</strong>
-              <span>Rules &amp; state — thresholds, timers, MakeCode logic</span>
-            </div>
-            <div class="layer">
-              <strong>Application</strong>
-              <span>Human interface — Thunkable dashboard, alerts, overrides</span>
-            </div>
-          </div>
-          <p class="tiny">Map each layer back to the smart garden out loud.</p>
-          <aside class="notes">
-            One diagram slide replaces five thin title cards. Ask: “Where does
-            the pump live? Where does the phone live?”
-          </aside>
-        </section>
-
-        <!-- 08 Your stack -->
-        <section>
-          <p class="eyebrow">Toolchain</p>
+          <p class="eyebrow">Internet of Things</p>
           <h2>Your stack for this challenge</h2>
-          <div class="grid-4">
-            <div class="card">
-              <h3>micro:bit</h3>
-              <p>Board + sensors / actuators in the physical world</p>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 0.45em;
+              margin-top: 0.7em;
+            "
+          >
+            <div>
+              <img
+                src="assets/media/illu-perception.jpg"
+                alt="Perception layer"
+                style="width: 100%; margin: 0 0 0.35em; border-radius: 0.35em"
+              />
+              <p style="margin: 0; font-size: 0.36em; color: var(--tou-purple)">
+                <strong>micro:bit</strong> · sensors &amp; actuators
+              </p>
             </div>
-            <div class="card">
-              <h3>MakeCode</h3>
-              <p>Program perception, rules, and actuation</p>
+            <div>
+              <img
+                src="assets/media/illu-network.jpg"
+                alt="Network layer"
+                style="width: 100%; margin: 0 0 0.35em; border-radius: 0.35em"
+              />
+              <p style="margin: 0; font-size: 0.36em; color: var(--tou-purple)">
+                <strong>Connect</strong> · how data travels
+              </p>
             </div>
-            <div class="card">
-              <h3>Flow diagram</h3>
-              <p>Design the system across all 4 layers</p>
+            <div>
+              <img
+                src="assets/media/illu-processing.jpg"
+                alt="Processing layer"
+                style="width: 100%; margin: 0 0 0.35em; border-radius: 0.35em"
+              />
+              <p style="margin: 0; font-size: 0.36em; color: var(--tou-purple)">
+                <strong>MakeCode</strong> · rules &amp; logic
+              </p>
             </div>
-            <div class="card highlight">
-              <h3>Thunkable</h3>
-              <p>Control dashboard on the phone</p>
+            <div>
+              <img
+                src="assets/media/illu-application.jpg"
+                alt="Application layer"
+                style="width: 100%; margin: 0 0 0.35em; border-radius: 0.35em"
+              />
+              <p style="margin: 0; font-size: 0.36em; color: var(--tou-purple)">
+                <strong>Thunkable</strong> · control dashboard
+              </p>
             </div>
           </div>
           <p class="prompt">Demo · 2–3 min · sensor → board → app tile</p>
-          <aside class="notes">
-            Live demo if hardware cooperates; otherwise play the 90s backup
-            recording. Make Capstone feel tangible.
-          </aside>
         </section>
 
-        <!-- 09 Activity brief -->
-        <section>
-          <p class="eyebrow">Activity · 10 minutes</p>
-          <h2>Design a mini IoT system</h2>
-          <div class="center-stack">
-            <p class="lede" style="max-width: none">
-              Teams of <strong>3–4</strong>. Pick <strong>one everyday friction</strong>.
-              Fill all four boxes — start from the problem, not a gadget wishlist.
-            </p>
-            <div class="grid-2" style="margin-top: 1em">
-              <div class="card">
-                <h3>Must include</h3>
-                <p>≥1 sensor · ≥1 actuator · 1 app control / display</p>
-              </div>
-              <div class="card">
-                <h3>Done looks like</h3>
-                <p>A filled 4-box canvas you can pitch in 45 seconds</p>
-              </div>
+        <!-- 10 Activity brief -->
+        <section data-background-color="#ffffff">
+          <div class="split">
+            <div class="split-left">
+              <h2 style="font-size: 1.45em; margin: 0 0 0.6em">
+                Create your<br />team of things
+              </h2>
+              <p style="font-size: 0.45em; margin: 0 0 0.45em">
+                Think about smart things
+              </p>
+              <p style="font-size: 0.45em; margin: 0">
+                Team up and make an IoT solution
+              </p>
+            </div>
+            <div class="split-right">
+              <p style="margin: 0 0 0.45em; font-size: 0.55em; color: var(--tou-ink)">
+                <strong>Which smart object can you connect?</strong>
+              </p>
+              <p style="margin: 0 0 0.55em; font-size: 0.42em">
+                Think about smart devices — how would you connect them to
+                simplify everyday life?
+              </p>
+              <p style="margin: 0 0 0.7em; font-size: 0.42em">
+                What is one problem you could solve through IoT?
+              </p>
+              <p style="margin: 0; font-size: 0.7em; color: var(--tou-ink)">
+                <strong>10 mins</strong>
+              </p>
+              <img
+                class="activity-art"
+                src="assets/media/meme-iot-coming.jpg"
+                alt="Brace yourselves, the Internet of Things is coming"
+              />
             </div>
           </div>
-          <aside class="notes">
-            Protect the clock. Redirect gadget bingo back to the problem box.
-          </aside>
         </section>
 
-        <!-- 10 Activity workspace -->
+        <!-- 11 Activity workspace -->
         <section>
           <p class="eyebrow">Leave this up</p>
           <h2>Your 4-box canvas</h2>
-          <div class="grid-2">
-            <div class="card">
+          <div class="canvas-grid">
+            <div class="box">
               <h3>1 · Problem</h3>
               <p>What friction? Who feels it?</p>
             </div>
-            <div class="card">
+            <div class="box">
               <h3>2 · Sensors</h3>
               <p>What physical signal will you measure?</p>
             </div>
-            <div class="card">
+            <div class="box">
               <h3>3 · Actuators + logic</h3>
               <p>What happens in the world, under which rule?</p>
             </div>
-            <div class="card highlight">
+            <div class="box">
               <h3>4 · App control</h3>
               <p>What does the user see or override on the phone?</p>
             </div>
           </div>
-          <p class="tiny">Example: travelling → soil moisture → valve if dry → live % + manual water</p>
-          <aside class="notes">
-            Walk breakouts. Coach teams stuck on gadgets. Call time at 10:00.
-          </aside>
+          <p class="tiny">
+            Example: travelling → soil moisture → valve if dry → live % + manual
+            water
+          </p>
         </section>
 
-        <!-- 11 Share-out -->
-        <section>
-          <p class="eyebrow">5 minutes</p>
+        <!-- 12 Share-out -->
+        <section class="slide-purple" data-background-color="#4214b7">
           <h2>Share-out</h2>
-          <p class="lede">Three teams · ~45 seconds each</p>
-          <div class="grid-2" style="max-width: 16em; margin: 1em auto 0">
-            <div class="card">
-              <h3>Coach for</h3>
-              <p>Where is Perception? What’s the user value?</p>
-            </div>
-            <div class="card">
-              <h3>Listen for</h3>
-              <p>Clear problem · real actuator · phone role</p>
-            </div>
-          </div>
-          <aside class="notes">
-            Affirm layer language. Tie strong answers forward to Capstone.
-          </aside>
+          <p style="font-size: 0.55em">Three teams · ~45 seconds each</p>
+          <p class="prompt">Where is Perception? What’s the user value?</p>
         </section>
 
-        <!-- 12 Challenge journey -->
+        <!-- 13 Challenge journey -->
         <section>
-          <p class="eyebrow">Your path</p>
-          <h2>Challenge journey</h2>
-          <div class="steps">
-            <div class="step">
-              <span class="n">Now</span>
-              <strong>Kick-Off</strong>
-              <span>Shared language + first idea</span>
+          <p class="eyebrow">Internet of Things</p>
+          <h2>Internet of Things</h2>
+          <div class="journey">
+            <div>
+              <div class="block">Explore IoT<br />Sensors and Actuators</div>
             </div>
-            <div class="step">
-              <span class="n">Explore</span>
-              <strong>Build skills</strong>
-              <span>Sensors, flow, MakeCode, app</span>
+            <div class="rail">Discussion</div>
+            <div>
+              <div class="block">Map your IoT Environment</div>
+              <span class="sub">Flow diagram</span>
             </div>
-            <div class="step">
-              <span class="n">Live</span>
-              <strong>Discussion</strong>
-              <span>Pressure-test your design</span>
+            <div>
+              <div class="block">Program your board</div>
+              <span class="sub">MakeCode Project</span>
             </div>
-            <div class="step">
-              <span class="n">Ship</span>
-              <strong>Capstone</strong>
-              <span>Three artifacts, one system</span>
+            <div class="rail">Reflection</div>
+            <div>
+              <div class="block">Create a Control Dashboard</div>
+              <span class="sub">Thunkable App</span>
             </div>
+            <div class="capstone">★ CAPSTONE</div>
           </div>
-          <aside class="notes">
-            Don’t drown in micro-tasks. Point to the App for milestone detail.
-          </aside>
+          <p class="tiny" style="text-align: left">
+            <span class="mark">Kick-Off</span>
+            &nbsp;→ explore → discussion → reflection → capstone
+          </p>
         </section>
 
-        <!-- 13 Capstone = 3 artifacts -->
+        <!-- 14 Capstone bar -->
         <section>
-          <p class="eyebrow">The bar</p>
+          <p class="eyebrow">Internet of Things</p>
           <h2>Capstone = 3 artifacts</h2>
           <table class="rubric">
             <thead>
@@ -694,31 +887,12 @@
               </tr>
             </tbody>
           </table>
-          <p class="tiny">Full assessment criteria live in the App — this is the spirit of the bar.</p>
-          <aside class="notes">
-            Same system, three views. Emphasize usability and test cases without
-            reading a wall of rubric text.
-          </aside>
-        </section>
-
-        <!-- 14 Exemplar -->
-        <section>
-          <p class="eyebrow">Learn from strength</p>
-          <h2>Exemplar walkthrough</h2>
-          <p class="lede">
-            Open one strong Capstone in the App. Look for layer clarity, tests,
-            and a usable dashboard — not perfection.
-          </p>
-          <p class="prompt">Open the exemplary Capstone in the App</p>
-          <aside class="notes">
-            2–3 minutes max. Narrate what “great” looks like using the rubric
-            language from the previous slide.
-          </aside>
+          <p class="tiny">Full assessment criteria live in the App.</p>
         </section>
 
         <!-- 15 Before you leave -->
         <section>
-          <p class="eyebrow">Wrap</p>
+          <p class="eyebrow">Wrap-Up</p>
           <h2>Before you leave</h2>
           <ul class="checklist">
             <li>Join Slack <strong>#-chl-internet-of-things</strong></li>
@@ -729,23 +903,12 @@
               flow diagram
             </li>
           </ul>
-          <aside class="notes">
-            One concrete next step beats a vague “get started.” Dates live in
-            the App calendar — don’t hardcode cohort dates into the deck.
-          </aside>
         </section>
 
         <!-- 16 Closer -->
-        <section class="title-slide">
-          <p class="eyebrow">See you in Discussion</p>
-          <h1>Go build something<br /><span class="accent">connected</span></h1>
-          <p class="lede">
-            Sense · Connect · Decide · Control
-          </p>
+        <section class="slide-purple" data-background-color="#4214b7">
+          <h1>See you next week!</h1>
           <p class="meta">#-chl-internet-of-things · Draft your flow tonight</p>
-          <aside class="notes">
-            Close with energy. Remind the homework bridge once more.
-          </aside>
         </section>
       </div>
     </div>
@@ -762,7 +925,7 @@
           backgroundTransition: "fade",
           width: 1280,
           height: 720,
-          margin: 0.08,
+          margin: 0.04,
           plugins: [RevealNotes],
         });
       }

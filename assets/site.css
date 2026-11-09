@@ -8,14 +8,14 @@ html.tou-login body {
 }
 
 :root {
-  --bg: #0f1412;
-  --bg-elevated: #18201c;
-  --surface: #1e2a24;
-  --text: #eef3ef;
-  --muted: #9aada2;
-  --accent: #3dbe8c;
-  --accent-dim: #2a8f68;
-  --line: rgba(238, 243, 239, 0.12);
+  --bg: #120a2a;
+  --bg-elevated: #1a1236;
+  --surface: #241a45;
+  --text: #f7f4ff;
+  --muted: #b7aed2;
+  --accent: #b8ff7a;
+  --accent-dim: #4214b7;
+  --line: rgba(184, 255, 122, 0.18);
   --warning: #e6b35a;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Figtree", system-ui, sans-serif;
